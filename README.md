@@ -37,12 +37,6 @@ pinxilin = bing qi ling
 - Be deployed online using a free deploy service so that anybody could use your app.
 - Responsive design.
 
-# Deliverables
-- A working full-stack application, built by you that runs on a server.
-- A working app deployed.
-- The URL of the GitHub repository for your app.
-- The URL of the live app on the Internet.
-- The URL of the slides for your app’s presentation.
-- You must present your app during Project #2 final presentations (last day of Project #2 time).
+pinxilin
 
 ffff

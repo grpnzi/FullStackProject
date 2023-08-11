@@ -15,6 +15,11 @@ pinxilin = bing qi ling
 
 ## try to create and map, scheme , draw and decide routes
 
+| Route | HTTP verb | Description|
+| --- | --- | --- |
+| /api/ | GET | Get all the routes |
+| /api/ | POST | Create a new route |
+
 ## distribute tasks among members
 
 # NOTE: no working on main branch eg: routes/teamMember

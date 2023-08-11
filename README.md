@@ -13,4 +13,14 @@ Testing push changes
 
 
 
-pinxilin
+pinxilin =  bing qi ling
+
+# set main functionality
+
+# try to create and map, scheme , draw and decide routes
+
+
+# distribute tasks among members
+
+
+

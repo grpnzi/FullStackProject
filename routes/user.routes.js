@@ -27,7 +27,7 @@ router.post("/signup", (req, res, next) => {
     if (!regex.test(password)) {
         res
             .status(500)
-            .render("auth/signup", { errorMessage: "Password needs to have at least 6 characterss and must contain at least one number, one lowercase and one uppercase letter." });
+            .render("auth/signup", { errorMessage: "Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter." });
         return;
     }
 
@@ -44,7 +44,7 @@ router.post("/signup", (req, res, next) => {
         })
         .then(createdUser => {
             console.log("New user: ", createdUser);
-            res.redirect("/user-profile");
+            res.render("users/user-profile", {createdUser});
           })
           .catch(error => {
               if (error instanceof mongoose.Error.ValidationError) {
@@ -107,50 +107,35 @@ router.get("/user-profile/:userId", (req, res, next) => {
         })
 })
 
-router.get("/user-profile/:userId/edit", (req, res, next) => {
-    const userId = req.params.userId
+// router.get("/user-profile/:userId/edit", (req, res, next) => {
+//     const userId = req.params.userId
 
-    User.findById(userId)
-        .then((foundUser) => {
-            res.render("users/user-edit", {foundUser})
-        })
-        .catch(error => {
-            console.log("Error while retrieving user details.");
-            next(error);
-        })    
-})
+//     User.findById(userId)
+//         .then((foundUser) => {
+//             res.render("users/user-edit", {foundUser})
+//         })
+//         .catch(error => {
+//             console.log("Error while retrieving user details.");
+//             next(error);
+//         })    
+// })
 
-router.post("/user-profile/:userId/edit", (req, res, next) => {
+// router.post("/user-profile/:userId/edit", (req, res, next) => {
 
-    const userId = {
-        username: req.body.username,
-        email: req.body.email,
-        country: req.body.country
-    }
+//     const userId = {
+//         username: req.body.username,
+//         email: req.body.email,
+//         country: req.body.country
+//     }
 
-    User.findByIdAndUpdate(userId)
-        .then(() => res.redirect(`/user-profile/${userId}`))
-        .catch(error => {
-            console.log("Error while updating user details.");
-            next(error);
-        })   
-})
+//     User.findByIdAndUpdate(userId)
+//         .then(() => res.redirect(`/user-profile/${userId}`))
+//         .catch(error => {
+//             console.log("Error while updating user details.");
+//             next(error);
+//         })   
+// })
 
-const bookId = req.params.bookId;
-    const book = {
-        title: req.body.title,
-        author: req.body.author,
-        description: req.body.description,
-        rating: req.body.rating
-    }
-    Book.findByIdAndUpdate(bookId, book, { new: true })
-        .then(theBook => res.redirect(`/books/${bookId}`))
-        .catch(error => {
-            console.log('Error while retrieving book details');
-
-            // Call the middleware to display an error in the browser
-            next(error);
-        })
 
 
 // LOG OUT ROUTES ------------------------------------------

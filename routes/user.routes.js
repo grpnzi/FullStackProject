@@ -121,7 +121,12 @@ router.get("/user-profile/:userId/edit", (req, res, next) => {
 })
 
 router.post("/user-profile/:userId/edit", (req, res, next) => {
-    const userId = req.params.userId
+
+    const userId = {
+        username: req.body.username,
+        email: req.body.email,
+        country: req.body.country
+    }
 
     User.findByIdAndUpdate(userId)
         .then(() => res.redirect(`/user-profile/${userId}`))
@@ -131,6 +136,21 @@ router.post("/user-profile/:userId/edit", (req, res, next) => {
         })   
 })
 
+const bookId = req.params.bookId;
+    const book = {
+        title: req.body.title,
+        author: req.body.author,
+        description: req.body.description,
+        rating: req.body.rating
+    }
+    Book.findByIdAndUpdate(bookId, book, { new: true })
+        .then(theBook => res.redirect(`/books/${bookId}`))
+        .catch(error => {
+            console.log('Error while retrieving book details');
+
+            // Call the middleware to display an error in the browser
+            next(error);
+        })
 
 
 // LOG OUT ROUTES ------------------------------------------

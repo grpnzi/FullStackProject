@@ -10,17 +10,13 @@ const placeSchema = new Schema(
       type: String,
       required: true,
     },
-    password: {
-      type: String,
-      required: true
-    },
     description: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     img: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     author: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     likes: [{ type: Schema.Types.ObjectId, ref: 'User' }]

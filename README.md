@@ -36,6 +36,7 @@ To do this, the necessary routes are the following:
 | /profile/:userId | GET | Display user profile |
 | /profile/:userId/edit | GET | Get edit form |
 | /profile/:userId/edit | POST | Update user profile |
+| /logout| POST | Ends user session |
 
 ### place.routes.js
 | Route | HTTP verb | Description|

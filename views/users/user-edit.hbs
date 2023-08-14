@@ -1,7 +1,7 @@
 <div>
-    <h2>Create your user</h2>
+    <h2>Update your details</h2>
     <div>
-        <form action="/signup" method="POST">
+        <form action="/user-profile/:userId/edit" method="POST">
             <label for="username">Username:
                 <input type="text" name="username" id="username" palceholder="Username" required>
             </label>
@@ -14,11 +14,7 @@
             <label for="country">Country:
                 <input type="text" name="country" id="country" placeholder="Country" required>
             </label>
-            <button type="submit">Sign up!</button>
+            <button type="submit">Update</button>
         </form>
-        
-        {{#if errorMessage}}
-            <p class="error">{{errorMessage}}</p>
-        {{/if}}
     </div>
 </div>

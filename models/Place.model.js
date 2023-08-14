@@ -4,29 +4,21 @@ const placeSchema = new Schema(
   {
     name: {
       type: String,
-      required: false,
+      required: true,
     },
     location: {
       type: String,
       required: true,
     },
-    password: {
+    description: {
+      type: String,
+      required: true,
+    },
+    img: {
       type: String,
       required: true
     },
-    description: {
-        type: String,
-        required: true,
-    },
-    img: {
-        type: String,
-        required: true
-    },
-    author: {
-      type: String,
-      required: true,
-      unique: true
-    },
+    author: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     likes: [{ type: Schema.Types.ObjectId, ref: 'User' }]
   },
   {  

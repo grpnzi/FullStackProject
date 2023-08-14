@@ -1,47 +1,52 @@
-# FullStackProject
+# PROJECT 2 
 
-Add someone
-test
-add something
-cvccvcv
+## The project
 
-dfsdfmklrd
+Welcome to PinnedFiction, your gateway to discovering the real-world locations that have inspired your favorite video games and movies. Our platform allows you to explore a curated collection of places contributed by our community. From the vivid streets of a virtual city to the iconic backdrop of a memorable scene, you'll find it all here.
 
-Testing push changes
+Immerse yourself in the intersections of imagination and reality as you explore actual places that mirror the virtual worlds you love. 
 
-pinxilin = bing qi ling
+Join us in celebrating the tangible magic that brings fictional universes to life. Start your journey with PinnedFiction today!
 
-## set main functionality
 
-## try to create and map, scheme , draw and decide routes
+## Structure
 
+Our website features a user-friendly landing page where visitors can create an account and existing users can log in. 
+
+For new users, the sign-up process is straightforward. They provide essential information to create an account, granting them access to the site's full range of features. Returning users can seamlessly log in using their credentials. Our robust authentication system ensures their privacy and security throughout their experience.
+
+
+Once logged in, users can create place entries that highlight real-life locations that have either inspired or appeared in movies, animes, mangas and/or videogames. Each place entry offers an image of the location along with a description written by the author of the entry. This blend of personal experience and multimedia engagement brings the user's memories to life and encourages visitors to plan their holidays. 
+
+To do this, the necessary routes are the following: 
+
+### index.routes.js
 | Route | HTTP verb | Description|
 | --- | --- | --- |
-| /api/ | GET | Get all the routes |
-| /api/ | POST | Create a new route |
+| / | GET | Get index route |
+| /about | GET | Get about route |
 
-## distribute tasks among members
+### user.routes.js
+| Route | HTTP verb | Description|
+| --- | --- | --- |
+| /signup | GET | Get signup form |
+| /signup | POST | Create new user |
+| /login | GET | Get login form |
+| /login | POST | Login user |
+| /profile/:userId | GET | Display user profile |
+| /profile/:userId/edit | GET | Get edit form |
+| /profile/:userId/edit | POST | Update user profile |
 
-# NOTE: no working on main branch eg: routes/teamMember
+### place.routes.js
+| Route | HTTP verb | Description|
+| --- | --- | --- |
+| /places-list | GET | Get list of all places |
+| /places/:placeId | GET | Get details of place |
+| /create | GET | Get new place form |
+| /create | POST | Create new place |
+| /edit/:placeId | GET | Get edit form |
+| /edit/:placeId | POST | Update place |
+| /delete | POST | Delete place |
 
-### Your app must:
 
-- Use Express as a foundation.
-
-- Use Mongoose for models and database communication.
-
-- Have 2 models or more. Having one for users is a no-brainer. The other one(s) should represent the main functionality of your app. Don’t force it if having more than two models doesn’t make sense.
-
-- Have validation on the models with feedback for users if their submission is invalid.
-
-- Include sign up, log in & log out functionality with encrypted passwords (and/or social logins) and authorization (logged in users can do extra things).
-
-- Implement all CRUD actions on models other than users. You should have the Create, Read, Update and Delete features even if they aren’t all for the same model.
-- Have a repo on GitHub.
-- Have at least 1 commit per day/person.
-- Be deployed online using a free deploy service so that anybody could use your app.
-- Responsive design.
-
-pinxilin
-
-ffff
+*THE REST OF THIS FILE WILL BE COMPLETED AS THE PROJECT IS DEVELOPED.* 

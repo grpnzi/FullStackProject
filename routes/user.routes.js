@@ -94,17 +94,8 @@ router.post("/login", (req, res, next) => {
 
 
 // USER PROFILE ROUTES ------------------------------------------
-router.get("/user-profile/:userId", (req, res, next) => {
-    const userId = req.params.userId
-
-    User.findById(userId)
-        .then((foundUser) => {
-            res.render("users/user-profile", {foundUser})
-        })
-        .catch(error => {
-            console.log("Error while retrieving user details.");
-            next(error);
-        })
+router.get("/user-profile", (req, res, next) => {
+    res.render('users/user-profile', { userInSession: req.session.currentUser });
 })
 
 // router.get("/user-profile/:userId/edit", (req, res, next) => {

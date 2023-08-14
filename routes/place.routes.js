@@ -11,7 +11,7 @@ const fileUploader = require('../config/cloudinary.config');
 
 
 // /places/:placeId	GET	Get details of place
-router.get('places/:placeId',(req, res) => {
+router.get('/places/:placeId',(req, res) => {
 
     Place.findById(req.params.id).populate('author')
 
@@ -72,7 +72,7 @@ router.get('/places', (req, res) => {
 
 // /edit/:placeId	get	edit place
 
-router.get('places/:placeId/edit',(req, res) => {
+router.get('/places/:placeId/edit',(req, res) => {
 
     Place.findById(req.params.id).populate('author')
 
@@ -101,7 +101,20 @@ router.get('places/:placeId/edit',(req, res) => {
       });
   });
   
-  
+  // DELETE we need to create a form in place-edit.hbs
+
+  router.post('/places/:placeId/delete', (req, res) => {
+    console.log(req.params.placeId);
+    Place.findByIdAndRemove(req.params.placeId)
+      .then(() => {
+        res.redirect('/');
+      })
+      .catch(error => {
+        console.error(error);
+        res.send('Error deleting data');
+      });
+  });
+      
 
 
 

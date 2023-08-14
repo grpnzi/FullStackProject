@@ -1,16 +1,16 @@
  <h1>CREATE NEW PLACE</h1>
    <form action="/places/create" method="post">
-  <label for="title">Place name:</label>
+  <label for="place name">Place name:</label>
   <input type="text" id="name" name="name" required>
   
-  <label for="genre">Location:</label>
+  <label for="location">Location:</label>
   <input type="text" id="location" name="location" required>
   
-  <label for="plot">Description:</label>
+  <label for="description">Description:</label>
   <textarea id="plot" name="plot" required></textarea>
   
   <label for="img">
-    <input type="file" name="img" class="form-control-file" />
+    <input type="file" name="img"/>
 </label>
 
   <button type="submit">Create</button>

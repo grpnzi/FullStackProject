@@ -6,6 +6,11 @@ const placeSchema = new Schema(
       type: String,
       required: true,
     },
+    source : {
+      type: String,
+      enum: ["Movie", "TV Show", "Videogame", "Anime", "Other"],
+      required: true
+    },
     location: {
       type: String,
       required: true,

@@ -1,2 +1,9 @@
-<h1>List of Places</h2>
-<ul></ul>
+<h2>List of Places</h2>
+
+{{#each places}}
+    <p>{{name}}</p>
+    <img src="{{img}}" alt="{{name}}">
+    <p>Created by {{author}}</p>
+    <p>{{location}}</p>
+    <p>{{description}}</p>
+{{/each}}

@@ -3,6 +3,8 @@ const Place = require('../models/Place.model');
 const User = require('../models/User.model');
 const router = express.Router();
 
+const fileUploader = require('../config/cloudinary.config');
+
 //PLACES LIST
 // /places-list	GET	Get list of all places
 
@@ -36,20 +38,21 @@ router.get("/places/create", (req, res ) => {
 
 
 
-  router.post('/places/create', (req, res) => {
-    const { name, location, description, img } = req.body;
-    if(!name || !location || !description || !img ){
+  router.post('/places/create', fileUploader.single('img') ,(req, res) => {
+    console.log(req.file.path);
+    const { name, location, description } = req.body;
+    if(!name || !location || !description ){
         res.render("places/create-new-place");
         return 
     }
-    Place.create({ name, location, description, img })
+    Place.create({ name, location, description, img: req.file.path, author: req.session.currentUser._id})
       .then(newPlace => {
         res.render('places/place-details', newPlace);
       })
       .catch(error => {
         console.error(error);
-        res.redirect('/places/create', { errorMessage: 'Error creating a place' });
-      });
+        res.status(500).render('places/create-new-place', { errorMessage: 'Error creating a place' });
+    });
   });
   
 

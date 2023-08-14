@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 const mongoose = require('mongoose')
 const User = require("../models/User.model");
+const { isLoggedIn } = require('../middleware/route-guard.js');
 
 
 // SIGN UP ROUTES ------------------------------------------
@@ -11,7 +12,7 @@ router.get("/signup", (req, res) => {
 })
 
 router.get("/user-profile", (req, res) => {
-    res.render("users/user-profile")
+    res.render('users/user-profile', { userInSession: req.session.currentUser });
 })
 
 router.post("/signup", (req, res, next) => {
@@ -82,7 +83,7 @@ router.post("/login", (req, res, next) => {
                 return;
             } else if (bcryptjs.compareSync(password, user.password)) {
                 req.session.currentUser = user;
-                res.redirect("/user-profile", {user});
+                res.redirect("/user-profile");
             } else {
                 console.log("Incorrect password. ");
                 res.render("auth/login", { errorMessage: "Incorrect user and/or password." });
@@ -94,10 +95,6 @@ router.post("/login", (req, res, next) => {
 
 
 // USER PROFILE ROUTES ------------------------------------------
-router.get("/user-profile", (req, res, next) => {
-    res.render('users/user-profile', { userInSession: req.session.currentUser });
-})
-
 // router.get("/user-profile/:userId/edit", (req, res, next) => {
 //     const userId = req.params.userId
 
@@ -130,12 +127,12 @@ router.get("/user-profile", (req, res, next) => {
 
 
 // LOG OUT ROUTES ------------------------------------------
-router.post("/logout", (req, res, next) => {
+router.post('/logout', isLoggedIn ,(req, res, next) => {
     req.session.destroy(err => {
-      if (err) next(err);
-      res.redirect('/');
+        if (err) next(err);
+        res.redirect('/');
     });
-})
+});
 
 
 module.exports = router;

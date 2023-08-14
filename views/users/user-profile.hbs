@@ -1,3 +1,4 @@
+{{#if userInSession}}
 <div>
     <h2>Hello, {{userInSession.username}}!</h2>
     {{!-- <div>
@@ -9,3 +10,9 @@
         {{!-- <a href="places/your-places">Check out your own creations.</a> --}}
     </div>
 </div>
+{{else}}
+<div>
+    <a href="/signup">Sign up</a>
+    <a href="/login">Log in</a>
+</div>
+{{/if}}

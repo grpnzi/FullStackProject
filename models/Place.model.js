@@ -22,11 +22,7 @@ const placeSchema = new Schema(
         type: String,
         required: true
     },
-    author: {
-      type: String,
-      required: true,
-      unique: true
-    },
+    author: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     likes: [{ type: Schema.Types.ObjectId, ref: 'User' }]
   },
   {  

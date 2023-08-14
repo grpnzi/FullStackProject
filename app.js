@@ -31,7 +31,7 @@ app.use("/", indexRoutes);
 const users = require('./routes/user.routes');
 app.use('/', users);
 
-const places = require('./routes/places.routes');
+const places = require('./routes/place.routes');
 app.use('/', places);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

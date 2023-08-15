@@ -15,13 +15,39 @@
                 <input type="text" name="country" id="country" placeholder="country" id="country" required>
             </label>
             <label for="profile-img">
-                <input type="file" name="profile-img" id="profile-img"/>
+                <input type="file" name="profile-img" id="profile-img" />
             </label>
             <button type="submit">Sign up!</button>
         </form>
-        
+
         {{#if errorMessage}}
-            <p class="error">{{errorMessage}}</p>
+        <p class="error">{{errorMessage}}</p>
         {{/if}}
     </div>
 </div>
+
+
+
+<form>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
+            placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <div class="form-group">
+        <form>
+            <label for="exampleFormControlFile1">Example file input</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </form>
+    </div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>

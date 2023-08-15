@@ -20,7 +20,7 @@ router.post("/signup", fileUploader.single("profile-img"), (req, res, next) => {
 
     const {username, email, password, country} = req.body
 
-    if (!username || !email|| !password || !country) {
+    if (!username || !email|| !password || !country || !req.file.path) {
         res.render("auth/signup", { errorMessage: "All fields are mandatory. Please provide all the information." });
         return;
     }

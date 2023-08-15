@@ -1,18 +1,21 @@
 <div>
     <h2>Create your user</h2>
     <div>
-        <form action="/signup" method="POST">
+        <form action="/signup" method="POST" enctype="multipart/form-data">
             <label for="username">Username:
-                <input type="text" name="username" id="username" palceholder="username" required>
+                <input type="text" name="username" id="username" palceholder="username" id="username" required>
             </label>
             <label for="email">Email:
-                <input type="email" name="email" id="email" placeholder="your@email.com" required>
+                <input type="email" name="email" id="email" placeholder="your@email.com" id="email" required>
             </label>
             <label for="password">Password:
-                <input type="password" name="password" id="password" placeholder="********" required>
+                <input type="password" name="password" id="password" placeholder="********" id="password" required>
             </label>
             <label for="country">Country:
-                <input type="text" name="country" id="country" placeholder="country" required>
+                <input type="text" name="country" id="country" placeholder="country" id="country" required>
+            </label>
+            <label for="profile-img">
+                <input type="file" name="profile-img" id="profile-img"/>
             </label>
             <button type="submit">Sign up!</button>
         </form>

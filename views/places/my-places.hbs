@@ -1,4 +1,19 @@
-<h1>My places</h1>
+<h1>Your Created Places</h1>
+<ul>
+  {{#each userPlaces}}
+    <li>
+      <h2>{{name}}</h2>
+      <h3>Location:</h3><p>{{location}}</p>
+      <h3>Description:</h3><p>{{description}}</p>
+       <img src="{{img}}" alt="{{name}}">
+       <a href="/places/{{_id}}/edit">Edit</a> <!-- Edit link -->
+      <form action="/places/{{_id}}/delete" method="post"> <!-- Delete form -->
+        <button type="submit">Delete</button>
+    </li>
+    
+  {{/each}}
+</ul>
+
 
 {{!-- TO BE FILLED IN ONCE POPULATE AUTHOR IS DONE --}}
 

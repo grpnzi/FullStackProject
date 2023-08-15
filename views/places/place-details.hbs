@@ -1,4 +1,4 @@
-<h1>PLACE DETAILS</h1>
+{{!-- <h1>PLACE DETAILS</h1>
 
 <h2>{{places.name}}</h2>
 
@@ -13,4 +13,49 @@
 
 {{#each places.author}}
 <p>Created by {{this.username}}</p>
-{{/each}}
+{{/each}} --}}
+
+<body class="text-center"> <!-- Add text-center class to the body -->
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center">{{places.name}}</h1>
+    </div>
+  </div>
+  
+  <div class="row mt-3">
+    <div class="col-12 text-center"> <!-- Add text-center class here -->
+      <img src="{{places.img}}" class="img-fluid" alt="Place Image">
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-12 text-center"> <!-- Add text-center class here -->
+      <h2>Location</h2>
+      <p>{{places.location}}</p>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-12 text-center"> <!-- Add text-center class here -->
+      <h2>Description</h2>
+      <p>{{places.description}}</p>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-12 text-center"> <!-- Add text-center class here -->
+      <h2>Author</h2>
+      {{#each places.author}}
+      <p>Created by {{this.username}}</p>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>

@@ -68,12 +68,6 @@ router.get('/places/:placeId', (req, res) => {
 
 router.get('/places/:placeId/edit', (req, res) => {
 
-  const { name, location, description, source, title } = req.body;
-  if (!name || !location || !description || !source || !title || !req.file.path) {
-    res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide all the information.' });
-    return
-  }
-
   Place.findById(req.params.placeId).populate('author')
 
     .then((places) => {
@@ -87,13 +81,17 @@ router.get('/places/:placeId/edit', (req, res) => {
 });
 
 //POST edit places
-
-router.post('/places/:placeId/edit', (req, res) => {
-  const { name, location, description, img } = req.body;
-
-  Place.findByIdAndUpdate({ _id: req.params.placeId }, { name, location, description, img }, { new: true })
+router.post('/places/:placeId/edit', fileUploader.single("img"), (req, res) => {
+  console.log("testing reouter post")
+  const placeId = req.params.placeId;
+  const { name, location, description, source, title, previousImg } = req.body;
+  if (!name || !location || !description || !source || !title) {
+    res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide all the information.' });
+    return
+  }
+  Place.findByIdAndUpdate(placeId, { name, location, description, img: req.file?.path || previousImg, source, title })
     .then(() => {
-      res.redirect(`/places/${req.params.placeId}`);
+      res.redirect('/places/'+ placeId);
     })
     .catch(error => {
       console.error(error);
@@ -102,7 +100,6 @@ router.post('/places/:placeId/edit', (req, res) => {
 });
 
 // DELETE we need to create a form in place-edit.hbs
-
 router.post('/places/:placeId/delete', (req, res) => {
   console.log(req.params.placeId);
   Place.findByIdAndRemove(req.params.placeId)

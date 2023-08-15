@@ -101,7 +101,7 @@ router.post('/places/:placeId/delete', (req, res) => {
   console.log(req.params.placeId);
   Place.findByIdAndRemove(req.params.placeId)
     .then(() => {
-      res.redirect('/');
+      res.redirect('/places/my-places/'+ req.session.currentUser._id);
     })
     .catch(error => {
       console.error(error);

@@ -1,19 +1,24 @@
-<h1>EDIT PLACE - {{places.name}}</h1>
+<h1>Edit {{places.name}}</h1>
 <form action="/places/{{data._id}}/edit" method="post" enctype="multipart/form-data">
 
-  <label for="place name">Place name:</label>
+  <label for="name">Name</label>
   <input type="text" id="name" name="name" value="{{places.name}}" required>
 
-  <label for="location">Location:</label>
+  <label for="source">Source</label>
+  <input type="text" id="source" name="source" value="{{places.source}}" required>
+
+  <label for="title">Title</label>
+  <input type="text" id="title" name="title" value="{{places.title}}" required>
+
+  <label for="location">Location</label>
   <input type="text" id="location" name="location" value="{{places.location}}" required>
 
-  <label for="description">Description:</label>
+  <label for="description">Description</label>
   <textarea id="description" name="description" value="{{places.description}}" required></textarea>
 
-  <label for="img">
-    <input type="file" name="img" id="img" />
-  </label>
-  <button type="submit">EDIT</button>
+  <label for="img"></label>
+    <input type="file" name="img" id="img" required/>
+  <button type="submit">Edit</button>
 
   {{#if errorMessage}}
   <p class="error">{{errorMessage}}</p>

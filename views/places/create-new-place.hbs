@@ -1,19 +1,14 @@
 <h2>Create a new Pinned Spot</h2>
 
 <form action="/places/create" method="post" enctype="multipart/form-data">
-  <label for="name">Name
+  <label for="name">Name</label>
     <input type="text" id="name" name="name" placeholder="Name" required>
-  </label>
-  <label for="location">Location
+  <label for="location">Location</label>
     <input type="text" id="location" name="location" placeholder="City" required>
-  </label>
-  <label for="title">Title
+  <label for="title">Title</label>
     <textarea id="title" name="title" placeholder="This spot is from the movie..." required></textarea>
-  </label>
-
-  <label for="description">Description
+  <label for="description">Description</label>
     <textarea id="description" name="description" placeholder="What is the place like?" required></textarea>
-  </label>
 
   <label for="source">Source
     <select id="source" name="source" required>
@@ -25,9 +20,9 @@
       <option value="Other">Other</option>
     </select>
   </label>
-  <label for="img">
-    <input type="file" name="img" id="img" required>
-  </label>
+  <label for="img"></label>
+  <input type="file" name="img" id="img" required>
+  
   <button type="submit">Create</button>
 
   {{#if errorMessage}}

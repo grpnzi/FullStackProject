@@ -68,6 +68,12 @@ router.get('/places/:placeId', (req, res) => {
 
 router.get('/places/:placeId/edit', (req, res) => {
 
+  const { name, location, description, source, title } = req.body;
+  if (!name || !location || !description || !source || !title || !req.file.path) {
+    res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide all the information.' });
+    return
+  }
+
   Place.findById(req.params.placeId).populate('author')
 
     .then((places) => {

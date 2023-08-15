@@ -1,5 +1,5 @@
 <h1>Edit {{places.name}}</h1>
-<form action="/places/{{data._id}}/edit" method="post" enctype="multipart/form-data">
+<form action="/places/{{places._id}}/edit" method="post" enctype="multipart/form-data">
 
   <label for="name">Name</label>
   <input type="text" id="name" name="name" value="{{places.name}}" required>
@@ -14,17 +14,15 @@
   <input type="text" id="location" name="location" value="{{places.location}}" required>
 
   <label for="description">Description</label>
-  <textarea id="description" name="description" value="{{places.description}}" required></textarea>
+  <textarea id="description" name="description" required>{{places.description}}</textarea>
 
   <label for="img"></label>
-    <input type="file" name="img" id="img" required/>
+  <input type="file" name="img" id="img"/>
+  <input type="text" style="display: none;" name="previousImg" value="{{places.img}}"/>
+
   <button type="submit">Edit</button>
 
   {{#if errorMessage}}
   <p class="error">{{errorMessage}}</p>
   {{/if}}
-</form>
-
-<form action="/places/{{places._id}}/delete" method="post">
-  <button type="submit">DELETE</button>
 </form>

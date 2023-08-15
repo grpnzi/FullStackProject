@@ -7,7 +7,7 @@
     <div>
         <a href="/places">Browse your favourite spots.</a>
         <a href="/places/create">Add to the PinnedFiction library!</a>
-        {{!-- <a href="places/your-places">Check out your own creations.</a> --}}
+        <a href="/places/my-places/{{userInSession._id}}">Check out your own creations.</a> 
     </div>
 
     <form id="logout-form" action="/logout" method="POST">

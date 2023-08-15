@@ -37,7 +37,7 @@ router.post('/places/create', fileUploader.single('img'), (req, res) => {
   }
   Place.create({ name, location, description, img: req.file.path, author: req.session.currentUser._id, source, title })
     .then(newPlace => {
-      res.render('places/place-details', newPlace);
+      res.redirect('/places/'+ newPlace._id);
     })
     .catch(error => {
       console.error(error);
@@ -68,7 +68,7 @@ router.get('/places/:placeId', (req, res) => {
 
 router.get('/places/:placeId/edit', (req, res) => {
 
-  Place.findById(req.params.id).populate('author')
+  Place.findById(req.params.placeId).populate('author')
 
     .then((places) => {
       res.render('places/place-edit', { places });
@@ -109,5 +109,21 @@ router.post('/places/:placeId/delete', (req, res) => {
     });
 });
 
+// DISPLAY USER CREATIONS IN USER PROFILE
+
+router.get('/places/my-places/:userId', (req, res) => {
+  const userId = req.params.userId;
+
+  Place.find({ author: userId }).populate('author')
+    .then(userPlaces => {
+      res.render('places/my-places', { userPlaces });
+    })
+    .catch(error => {
+      console.error(error);
+      res.send('Error fetching data');
+    });
+});
+
 
 module.exports = router;
+

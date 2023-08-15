@@ -1,12 +1,19 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@media (max-width: 575px) {
+
 }
 
-a {
-  color: #00b7ff;
+@media (min-width: 576px) and (max-width: 767px) {
+
 }
 
-h1 {
-  color: 15px;
+@media (min-width: 768px) and (max-width: 991px) {
+  
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  
+}
+
+@media (min-width: 1200px) {
+  
 }

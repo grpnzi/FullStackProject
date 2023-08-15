@@ -29,13 +29,13 @@ router.get("/places/create", (req, res ) => {
 // /create	POST	Create new place
 
 router.post('/places/create', fileUploader.single('img') ,(req, res) => {
-  console.log(req.file.path);
-  const { name, location, description, source } = req.body;
-  if(!name || !location || !description || !source ){
+
+  const { name, location, description, source, title } = req.body;
+  if(!name || !location || !description || !source || !title || !req.file.path){
       res.render("places/create-new-place");
       return 
   }
-  Place.create({ name, location, description, img: req.file.path, author: req.session.currentUser._id, source})
+  Place.create({ name, location, description, img: req.file.path, author: req.session.currentUser._id, source, title})
     .then(newPlace => {
       res.render('places/place-details', newPlace);
     })
@@ -49,13 +49,16 @@ router.post('/places/create', fileUploader.single('img') ,(req, res) => {
 
 // /places/:placeId	GET	Get details of place
 router.get('/places/:placeId',(req, res) => {
-
+    let isAuthor = false
     Place.findById(req.params.id).populate('author')
-
     .then((places) =>{
-        res.render('places/place-details', { places }); 
+      console.log(places);
+      if (places.author === req.session.currentUser._id) {
+        isAuthor = true
+      }
+
+      res.render('places/place-details', { places, isAuthor }); 
     })
-     
     .catch ((error)=> {
       console.error(error);
       res.send('Error fetching data', error);

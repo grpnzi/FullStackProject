@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const User = require("../models/User.model");
 const { isLoggedIn } = require('../middleware/route-guard.js');
 
+const fileUploader = require('../config/cloudinary.config');
 
 // SIGN UP ROUTES ------------------------------------------
 router.get("/signup", (req, res) => {

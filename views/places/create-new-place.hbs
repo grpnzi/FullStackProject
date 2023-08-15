@@ -1,17 +1,27 @@
- <h2>Create a new Pinned Spot</h2>
+<h2>Create a new Pinned Spot</h2>
 
-  <form action="/places/create" method="post" enctype="multipart/form-data">
-    <label for="place name">Name:
-      <input type="text" id="name" name="name" placeholder="name" required>
-    </label>
-    <label for="location">Location:
-      <input type="text" id="location" name="location" placeholder="city" required>
-    </label>
-    <label for="description">Description:
-      <textarea id="description" name="description" placeholder="This spot is from the movie..." required></textarea>
-    </label>
-    <label for="img">
-      <input type="file" name="img" id="img"/>
-    </label>
-  </form>
+<form action="/places/create" method="post" enctype="multipart/form-data">
+  <label for="name">Name:
+    <input type="text" id="name" name="name" placeholder="Name" required>
+  </label>
+  <label for="location">Location:
+    <input type="text" id="location" name="location" placeholder="City" required>
+  </label>
+  <label for="description">Description:
+    <textarea id="description" name="description" placeholder="This spot is from the movie..." required></textarea>
+  </label>
+  <label for="source">Source:
+    <select id="source" name="source" required>
+      <option value="" disabled selected>Select a source</option>
+      <option value="Movie">Movie</option>
+      <option value="TV Show">TV Show</option>
+      <option value="Videogame">Videogame</option>
+      <option value="Anime">Anime</option>
+      <option value="Other">Other</option>
+    </select>
+  </label>
+  <label for="img">
+    <input type="file" name="img" id="img" required>
+  </label>
   <button type="submit">Create</button>
+</form>

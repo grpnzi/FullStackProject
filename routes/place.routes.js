@@ -7,6 +7,43 @@ const fileUploader = require('../config/cloudinary.config');
 
 //PLACES LIST
 // /places-list	GET	Get list of all places
+router.get('/places', (req, res) => {
+  Place.find()
+    .then(places => {
+      res.render('places/places', { places });
+    })
+    .catch(error => {
+      console.error(error);
+      res.send('Error fetching data');
+    });
+});
+
+
+// /create	GET	Get new place form
+
+router.get("/places/create", (req, res ) => {
+  res.render("places/create-new-place");
+});
+
+
+// /create	POST	Create new place
+
+router.post('/places/create', fileUploader.single('img') ,(req, res) => {
+  console.log(req.file.path);
+  const { name, location, description, source } = req.body;
+  if(!name || !location || !description || !source ){
+      res.render("places/create-new-place");
+      return 
+  }
+  Place.create({ name, location, description, img: req.file.path, author: req.session.currentUser._id, source})
+    .then(newPlace => {
+      res.render('places/place-details', newPlace);
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).render('places/create-new-place', { errorMessage: 'Error creating a place' });
+  });
+});
 
 
 
@@ -27,48 +64,6 @@ router.get('/places/:placeId',(req, res) => {
 
   }); 
 
-// /create	GET	Get new place form
-
-router.get("/places/create", (req, res ) => {
-    res.render("places/create-new-place");
-  });
-  
-
-// /create	POST	Create new place
-
-
-
-  router.post('/places/create', fileUploader.single('img') ,(req, res) => {
-    console.log(req.file.path);
-    const { name, location, description } = req.body;
-    if(!name || !location || !description ){
-        res.render("places/create-new-place");
-        return 
-    }
-    Place.create({ name, location, description, img: req.file.path, author: req.session.currentUser._id})
-      .then(newPlace => {
-        res.render('places/place-details', newPlace);
-      })
-      .catch(error => {
-        console.error(error);
-        res.status(500).render('places/create-new-place', { errorMessage: 'Error creating a place' });
-    });
-  });
-  
-
-// /edit/:placeId	GET	all places displayed
-
-router.get('/places', (req, res) => {
-    Place.find()
-      .then(places => {
-        res.render('places/places', { places });
-      })
-      .catch(error => {
-        console.error(error);
-        res.send('Error fetching data');
-      });
-  });
-  
 
 // /edit/:placeId	get	edit place
 

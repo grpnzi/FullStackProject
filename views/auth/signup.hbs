@@ -1,21 +1,21 @@
-<div>
+{{!-- <div>
     <h2>Create your user</h2>
     <div>
         <form action="/signup" method="POST" enctype="multipart/form-data">
-            <label for="username">Username:
+            <label for="username">Username
                 <input type="text" name="username" id="username" palceholder="username" id="username" required>
             </label>
-            <label for="email">Email:
+            <label for="email">Email
                 <input type="email" name="email" id="email" placeholder="your@email.com" id="email" required>
             </label>
-            <label for="password">Password:
+            <label for="password">Password
                 <input type="password" name="password" id="password" placeholder="********" id="password" required>
             </label>
-            <label for="country">Country:
+            <label for="country">Country
                 <input type="text" name="country" id="country" placeholder="country" id="country" required>
             </label>
             <label for="profile-img">
-                <input type="file" name="profile-img" id="profile-img" />
+                <input type="file" name="profile-img" id="profile-img" required />
             </label>
             <button type="submit">Sign up!</button>
         </form>
@@ -24,30 +24,32 @@
         <p class="error">{{errorMessage}}</p>
         {{/if}}
     </div>
-</div>
+</div> --}}
 
 
 
 <form>
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
-            placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <input type="text" class="form-control mb-2 mr-sm-2" id="username" placeholder="Username">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="********">
     </div>
     <div class="form-group">
-        <form>
-            <label for="exampleFormControlFile1">Example file input</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-        </form>
+        <label for="country">Country</label>
+        <input type="text" class="form-control mb-2 mr-sm-2" id="country" placeholder="Country">
     </div>
-<button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+        {{!-- <form> --}}
+        <label for="profile-img">Choose your profile picture</label>
+        <input type="file" class="form-control-file" id="profile-img">
+        {{!-- </form> --}}
+    </div>
+    <button type="submit" class="btn btn-primary">Create your profile</button>
 </form>

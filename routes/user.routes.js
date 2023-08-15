@@ -15,7 +15,7 @@ router.get("/user-profile", (req, res) => {
     res.render('users/user-profile', { userInSession: req.session.currentUser });
 })
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", fileUploader.single("profile-img"), (req, res, next) => {
 
     const {username, email, password, country} = req.body
 
@@ -40,7 +40,8 @@ router.post("/signup", (req, res, next) => {
                 username,
                 email,
                 password: hashedPassword,
-                country
+                country,
+                img: req.file.path
             })
         })
         .then(createdUser => {

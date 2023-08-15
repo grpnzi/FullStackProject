@@ -1,9 +1,14 @@
 <h2>List of Places</h2>
 
 {{#each places}}
-    <p>{{name}}</p>
-    <img src="{{img}}" alt="{{name}}">
-    <p>Created by {{author}}</p>
-    <p>{{location}}</p>
-    <p>{{description}}</p>
+  <p>{{name}}</p>
+  <img src="{{img}}" alt="{{name}}">
+  
+  {{#each author}}
+    <p>Created by {{this.username}}</p>
+  {{/each}}
+  
+  <p>{{source}}</p>
+  <p>{{title}}</p>
+  <a href="/places/{{_id}}">Read More</a>
 {{/each}}

@@ -3,12 +3,12 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 const mongoose = require('mongoose')
 const User = require("../models/User.model");
-const { isLoggedIn } = require('../middleware/route-guard.js');
+const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 
 const fileUploader = require('../config/cloudinary.config');
 
 // SIGN UP ROUTES ------------------------------------------
-router.get("/signup", (req, res) => {
+router.get("/signup", isLoggedOut, (req, res) => {
     res.render("auth/signup")
 })
 
@@ -18,9 +18,9 @@ router.get("/user-profile", (req, res) => {
 
 router.post("/signup", fileUploader.single("profile-img"), (req, res, next) => {
 
-    const {username, email, password, country} = req.body
+    const { username, email, password, country } = req.body
 
-    if (!username || !email|| !password || !country || !req.file.path) {
+    if (!username || !email || !password || !country || !req.file.path) {
         res.render("auth/signup", { errorMessage: "All fields are mandatory. Please provide all the information." });
         return;
     }
@@ -47,21 +47,21 @@ router.post("/signup", fileUploader.single("profile-img"), (req, res, next) => {
         })
         .then(createdUser => {
             console.log("New user: ", createdUser);
-            res.render("users/user-profile", {createdUser});
-          })
-          .catch(error => {
-              if (error instanceof mongoose.Error.ValidationError) {
-                  res.status(500).render("auth/signup", { errorMessage: error.message });
-              } else {
-                  next(error);
-              }
-          });
+            res.render("users/user-profile", { createdUser });
+        })
+        .catch(error => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                res.status(500).render("auth/signup", { errorMessage: error.message });
+            } else {
+                next(error);
+            }
+        });
 })
 
 
 
 //LOG IN ROUTES ------------------------------------------
-router.get("/login", (req, res) => {
+router.get("/login", isLoggedOut,(req, res) => {
     res.render("auth/login")
 })
 
@@ -85,6 +85,8 @@ router.post("/login", (req, res, next) => {
                 return;
             } else if (bcryptjs.compareSync(password, user.password)) {
                 req.session.currentUser = user;
+                // Remove the password field
+                delete req.session.currentUser.password;
                 res.redirect("/user-profile");
             } else {
                 console.log("Incorrect password. ");
@@ -129,7 +131,7 @@ router.post("/login", (req, res, next) => {
 
 
 // LOG OUT ROUTES ------------------------------------------
-router.post('/logout', isLoggedIn ,(req, res, next) => {
+router.post('/logout', isLoggedIn, (req, res, next) => {
     req.session.destroy(err => {
         if (err) next(err);
         res.redirect('/');

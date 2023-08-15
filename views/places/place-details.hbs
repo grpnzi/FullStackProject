@@ -2,7 +2,7 @@
 
 <h2>{{places.name}}</h2>
 
-<IMG src="{{places.img}}">PLACE IMAGE</IMG>
+<IMG src="{{places.img}}"></IMG>
 
 <h2>location:</h2>
 <p>{{places.location}}</p>
@@ -10,3 +10,7 @@
 <h2>Description</h2>
 
 <p>{{places.description}}</p>
+
+{{#each places.author}}
+<p>Created by {{this.username}}</p>
+{{/each}}

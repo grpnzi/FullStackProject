@@ -32,7 +32,7 @@ router.post('/places/create', fileUploader.single('img') ,(req, res) => {
 
   const { name, location, description, source, title } = req.body;
   if(!name || !location || !description || !source || !title || !req.file.path){
-      res.render("places/create-new-place");
+      res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide all the information.' });
       return 
   }
   Place.create({ name, location, description, img: req.file.path, author: req.session.currentUser._id, source, title})
@@ -49,14 +49,10 @@ router.post('/places/create', fileUploader.single('img') ,(req, res) => {
 
 // /places/:placeId	GET	Get details of place
 router.get('/places/:placeId',(req, res) => {
+  
     let isAuthor = false
-    Place.findById(req.params.id).populate('author')
+    Place.findById(req.params.placeId).populate('author')
     .then((places) =>{
-      console.log(places);
-      if (places.author === req.session.currentUser._id) {
-        isAuthor = true
-      }
-
       res.render('places/place-details', { places, isAuthor }); 
     })
     .catch ((error)=> {

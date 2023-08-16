@@ -1,31 +1,41 @@
-<h2>Create a new Pinned Spot</h2>
-
-<form action="/places/create" method="post" enctype="multipart/form-data">
-  <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Name" required>
-  <label for="location">Location</label>
-    <input type="text" id="location" name="location" placeholder="City" required>
-  <label for="title">Title</label>
-    <textarea id="title" name="title" placeholder="This spot is from the movie..." required></textarea>
-  <label for="description">Description</label>
-    <textarea id="description" name="description" placeholder="What is the place like?" required></textarea>
-
-  <label for="source">Source
-    <select id="source" name="source" required>
-      <option value="" disabled selected>Select a source</option>
-      <option value="Movie">Movie</option>
-      <option value="TV Show">TV Show</option>
-      <option value="Videogame">Videogame</option>
-      <option value="Anime">Anime</option>
-      <option value="Other">Other</option>
-    </select>
-  </label>
-  <label for="img"></label>
-  <input type="file" name="img" id="img" required>
-  
-  <button type="submit">Create</button>
-
-  {{#if errorMessage}}
-  <p class="error">{{errorMessage}}</p>
-  {{/if}}
-</form>
+<div class="container mb-4 mt-4" style="background-color: #EEA2A2;">
+  <h2 class="text-center mb-4">Create a New Pinned Spot</h2>
+  <form action="/places/create" method="post" enctype="multipart/form-data" class="border p-4 rounded">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" class="form-control" id="location" name="location" placeholder="City" required>
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <textarea class="form-control" id="title" name="title" placeholder="This spot is from the movie..." required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" name="description" placeholder="What is the place like?" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="source">Source</label>
+      <select class="form-control" id="source" name="source" required>
+        <option value="" disabled selected>Select a source</option>
+        <option value="Movie">Movie</option>
+        <option value="TV Show">TV Show</option>
+        <option value="Videogame">Videogame</option>
+        <option value="Anime">Anime</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="img">Image</label>
+      <input type="file" class="form-control-file" name="img" id="img" required>
+    </div>
+    <button type="submit" class="btn btn-dark btn-block">Create</button>
+    
+    {{#if errorMessage}}
+    <p class="error mt-3">{{errorMessage}}</p>
+    {{/if}}
+  </form>
+</div>

@@ -1,22 +1,98 @@
 {{#if userInSession}}
-<div>
-    <h2>Hello, {{userInSession.username}}!</h2>
-    {{!-- <div>
-        <a href="/users/user-edit">Edit your profile</a>
-    </div> --}}
-    <div>
-        <a href="/places">Browse your favourite spots.</a>
-        <a href="/places/create">Add to the PinnedFiction library!</a>
-        <a href="/places/my-places/{{userInSession._id}}">Check out your own creations.</a> 
-    </div>
 
-    <form id="logout-form" action="/logout" method="POST">
+<section class="h-100 gradient-custom-2">
+  <div class="container h-100">
+    <h2 class="mt-5">Hello, {{userInSession.username}}!</h2>
+    <form class="text-right" id="logout-form" action="/logout" method="POST">
         <button>Logout</button>
     </form>
-</div>
+
+    <div class="row d-flex justify-content-center align-items-center h-100 ">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row h-200" style="background-image: url('/images/signuphead.jpg'); background-size: cover;">
+            <div class="ms-4 mt-5 d-flex flex-column ml-3" style="width: 150px;">
+              <img src="{{userInSession.img}}" alt="My profile picture." class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px; z-index: 1">
+            </div>
+            <div style="background-color:rgba(255, 255, 255, 0.5)" class="h-50">
+                <div class="ms-3 ml-3" style="margin-top: 130px;">
+                <h5>{{userInSession.username}}</h5>
+                <p>{{userInSession.country}}</p>
+                </div>
+            </div>
+          </div>
+          
+          <div class="card-body p-4 text-black">
+            <div class="mb-5 mt-5">
+            </div>
+          </div>
+            
+            <div class="row g-3">
+              <div class="col mb-3">
+                <a href="/places" class="font-italic mb-1 text-dark"><img src="./images/favouritespots.jpg"
+                  alt="image 1" class="w-100 rounded-3"></a>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col mb-3">
+                <a href="/places/create" class="font-italic mb-1 text-dark"><img src="./images/createpinned.jpg"
+                  alt="image 1" class="w-100 rounded-3"></a>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col mb-3">
+                <a href="/places/my-places/{{userInSession._id}}" class="font-italic mb-1 text-dark"><img src="./images/owncreations.jpg"
+                  alt="image 1" class="w-100 rounded-3"></a> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+   
+  
+
 {{else}}
-<div>
-    <a href="/signup">Sign up</a>
-    <a href="/login">Log in</a>
-</div>
+<body style="background-image: url('/images/login_page.png'); background-size: cover;">
+
+    <div class="container">
+        <div class="d-flex justify-content-center h-100 mt-5">
+            <div class="card text-black" style="border-radius: 25px; background-color: rgba(255, 255, 255, 0.5);">
+                <div class="card-body">
+                    <form class="needs-validation" action="/login" method="POST">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" name="username">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn btn-primary btn-lg">
+                        </div>
+                        
+                        {{#if errorMessage}}
+                        <p class="error mt-3">{{errorMessage}}</p>
+                        {{/if}}
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?&nbsp;<a href="/signup"> Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 {{/if}}
+

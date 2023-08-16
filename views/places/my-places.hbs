@@ -1,21 +1,32 @@
-<h1>Your Created Places</h1>
-<ul>
+{{!-- my-places.hbs --}}
+
+<div class="container pt-4 pb-4">
   {{#each userPlaces}}
-    <li>
-      <h2>{{name}}</h2>
-      <h3>Location:</h3><p>{{location}}</p>
-      <h3>Description:</h3><p>{{description}}</p>
-       <img src="{{img}}" alt="{{name}}">
-       <a href="/places/{{_id}}/edit">Edit</a> <!-- Edit link -->
-      <form action="/places/{{_id}}/delete" method="post"> <!-- Delete form -->
-        <button type="submit">Delete</button>
-      </form>
-    </li>
-    
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{img}}" alt="{{name}}" class="img-fluid rounded">
+      </div>
+      <div class="col-md-6">
+        <h2>{{name}}</h2>
+        <h3>Location:</h3>
+        <p>{{location}}</p>
+        <h3>Description:</h3>
+        <p>{{description}}</p>
+        <div class="d-flex">
+          <form action="/places/{{_id}}/edit">
+            <button type="submit" class="btn btn-primary mr-2">Edit</button>
+          </form>
+          <form action="/places/{{_id}}/delete" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <hr class="my-10">
   {{/each}}
-</ul>
+</div>
 
 
-{{!-- TO BE FILLED IN ONCE POPULATE AUTHOR IS DONE --}}
+
 
 

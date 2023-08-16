@@ -4,8 +4,16 @@
   <label for="name">Name</label>
   <input type="text" id="name" name="name" value="{{places.name}}" required>
 
-  <label for="source">Source</label>
-  <input type="text" id="source" name="source" value="{{places.source}}" required>
+   <label for="source">Source
+    <select id="source" name="source" value="{{places.source}}" required>
+      <option value="" disabled selected>Select a source</option>
+      <option value="Movie">Movie</option>
+      <option value="TV Show">TV Show</option>
+      <option value="Videogame">Videogame</option>
+      <option value="Anime">Anime</option>
+      <option value="Other">Other</option>
+    </select>
+  </label>
 
   <label for="title">Title</label>
   <input type="text" id="title" name="title" value="{{places.title}}" required>

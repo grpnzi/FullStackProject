@@ -143,10 +143,7 @@ router.post("/search", (req, res) => {
       res.send('Error fetching data');
     });
 
-
-
-
-// })
+})
 
 router.post('/places/:placeId/like', isLoggedIn ,(req, res) => {
   const placeId = req.params.placeId;

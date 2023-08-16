@@ -2,6 +2,7 @@ const express = require('express');
 const Place = require('../models/Place.model');
 const User = require('../models/User.model');
 const router = express.Router();
+const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 
 const fileUploader = require('../config/cloudinary.config');
 
@@ -50,10 +51,10 @@ router.post('/places/create', fileUploader.single('img'), (req, res) => {
 // /places/:placeId	GET	Get details of place
 router.get('/places/:placeId', (req, res) => {
 
-  let isAuthor = false
   Place.findById(req.params.placeId).populate('author')
     .then((places) => {
-      res.render('places/place-details', { places, isAuthor });
+      console.log(places)
+      res.render('places/place-details', { places });
     })
     .catch((error) => {
       console.error(error);
@@ -129,15 +130,56 @@ router.get('/places/my-places/:userId', (req, res) => {
 
 
 
-// router.post("/search", (req, res) => {
-//   const 
-//   Place.find({ "title": { $regex: "", $options: "i" } })
-//     .then
+
+router.post("/search", (req, res) => {
+  const searchInput = req.body.searchInput
+  Place.find({ "name": { $regex: `${searchInput}`, $options: "i" } }).populate("author")
+    .then((places) => {
+      console.log(places);
+      res.render("places/places", {places})
+    })
+    .catch(error => {
+      console.error(error);
+      res.send('Error fetching data');
+    });
 
 
 
 
 // })
+
+router.post('/places/:placeId/like', isLoggedIn ,(req, res) => {
+  const placeId = req.params.placeId;
+  const userId = req.session.currentUser._id
+
+  Place.findById(placeId)
+    .then((data) => {
+      console.log(data.likes.includes(userId));
+      if(data.likes.includes(userId)) {
+        Place.updateOne(
+          { _id: `${placeId}` },
+          { $pull: { likes: `${userId}` } }
+        ).then(() => {
+          res.redirect("/places/" + placeId)
+        })
+      }
+      else {
+        Place.updateOne(
+          { _id: `${placeId}` }, 
+          { $addToSet: { likes: `${userId}` } }
+        ).then(() => {
+          res.redirect("/places/" + placeId)
+        })
+      }
+
+    })
+    .catch(error => {
+      console.error(error);
+      res.send('Error fetching data');
+    });
+});
+
+
 
 module.exports = router;
 

@@ -1,38 +1,38 @@
 <body class="text-center">
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-12">
-      <h1 class="text-center">{{places.name}}</h1>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <h1>{{places.name}}</h1>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <img src="{{places.img}}" class="img-fluid rounded shadow" alt="Place Image">
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <h2>Location</h2>
+        <a href="https://maps.google.com/?q={{places.location}}">{{places.location}}</a>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <h2>Description</h2>
+        <p>{{places.description}}</p>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <h2>Author</h2>
+        {{#each places.author}}
+        <p>Created by {{this.username}}</p>
+        {{/each}}
+      </div>
     </div>
   </div>
-  
-  <div class="row mt-3">
-    <div class="col-12 text-center">
-      <img src="{{places.img}}" class="img-fluid" alt="Place Image">
-    </div>
-  </div>
-  
-  <div class="row mt-4">
-    <div class="col-12 text-center">
-      <h2>Location</h2>
-      <p>{{places.location}}</p>
-    </div>
-  </div>
-  
-  <div class="row mt-4">
-    <div class="col-12 text-center">
-      <h2>Description</h2>
-      <p>{{places.description}}</p>
-    </div>
-  </div>
-  
-  <div class="row mt-4">
-    <div class="col-12 text-center">
-      <h2>Author</h2>
-      {{#each places.author}}
-      <p>Created by {{this.username}}</p>
-      {{/each}}
-    </div>
-  </div>
-</div>
 </body>

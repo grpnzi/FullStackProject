@@ -3,19 +3,21 @@
 </div>
 
 <section id="places">
-  <div class="row">
-    {{#each places}}
-    <div class="col-lg">
-      <div class="card border-primary rounded-lg mx-4 my-3 h-100">
-        <img class="card-img-top img-fluid p-3" src="{{img}}" alt="{{name}}" style="height: 30vh;">
-        <div class="card-body">
-          <h5 class="card-title"><a href="/places/{{_id}}">{{name}}</a></h5>
-          {{#each author}}
-          <p class="card-text">Created by {{this.username}}</p>
-          {{/each}}
+  <div class="container">
+    <div class="row mx-0">
+        {{#each places}}
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
+          <div class="card border-primary rounded-lg mx-4 my-3 h-100 shadow">
+            <img class="card-img-top img-fluid p-3 rounded-lg" src="{{img}}" alt="{{name}}" style="height: 30vh;">
+            <div class="card-body">
+              <h5 class="card-title"><a href="/places/{{_id}}">{{name}}</a></h5>
+              {{#each author}}
+              <p class="card-text">Created by {{this.username}}</p>
+              {{/each}}
+            </div>
+          </div>
         </div>
+        {{/each}}
       </div>
     </div>
-    {{/each}}
-  </div>
 </section>

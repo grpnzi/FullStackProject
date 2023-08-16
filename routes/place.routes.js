@@ -129,15 +129,15 @@ router.get('/places/my-places/:userId', (req, res) => {
 
 
 
-router.post("/search", (req, res) => {
-  const 
-  Place.find({ "title": { $regex: "", $options: "i" } })
-    .then
+// router.post("/search", (req, res) => {
+//   const 
+//   Place.find({ "title": { $regex: "", $options: "i" } })
+//     .then
 
 
 
 
-})
+// })
 
 module.exports = router;
 

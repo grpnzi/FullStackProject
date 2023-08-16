@@ -24,13 +24,13 @@ const isLoggedOut = (req, res, next) => {
 
 
 const authorUser = (req,res,next) => {
-    if (!req.session.currentUser) {
-        return res.redirect('/login');
-    }
-    if(req.session.currentUser._id === req.params.userId) {
+
+    if(req.session.currentUser?._id === req.params.userId) {
         next()
+       
+    } else {
+        return res.redirect('/login')
     }
-    return res.redirect('/login')
 }
 
 module.exports = {

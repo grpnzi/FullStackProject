@@ -18,7 +18,23 @@ const isLoggedOut = (req, res, next) => {
     next();
 };
 
+
+// ccreate function that checks if you are logged in that your session is identical to your user id request.param._id
+
+
+
+const authorUser = (req,res,next) => {
+    if (!req.session.currentUser) {
+        return res.redirect('/login');
+    }
+    if(req.session.currentUser._id === req.params.userId) {
+        next()
+    }
+    return res.redirect('/login')
+}
+
 module.exports = {
     isLoggedIn,
-    isLoggedOut
+    isLoggedOut,
+    authorUser
 };

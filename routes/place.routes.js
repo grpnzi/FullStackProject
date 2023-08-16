@@ -2,7 +2,7 @@ const express = require('express');
 const Place = require('../models/Place.model');
 const User = require('../models/User.model');
 const router = express.Router();
-const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
+const { isLoggedIn, isLoggedOut, authorUser } = require('../middleware/route-guard.js');
 
 const fileUploader = require('../config/cloudinary.config');
 
@@ -115,7 +115,7 @@ router.post('/places/:placeId/delete', (req, res) => {
 
 // DISPLAY USER CREATIONS IN USER PROFILE
 
-router.get('/places/my-places/:userId', (req, res) => {
+router.get('/places/my-places/:userId', authorUser, (req, res) => {
   const userId = req.params.userId;
 
   Place.find({ author: userId }).populate('author')
@@ -142,11 +142,7 @@ router.post("/search", (req, res) => {
       console.error(error);
       res.send('Error fetching data');
     });
-
-
-
-
-// })
+})
 
 router.post('/places/:placeId/like', isLoggedIn ,(req, res) => {
   const placeId = req.params.placeId;

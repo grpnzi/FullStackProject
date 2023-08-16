@@ -22,7 +22,7 @@ router.get('/places', (req, res) => {
 
 // /create	GET	Get new place form
 
-router.get("/places/create", (req, res) => {
+router.get("/places/create", isLoggedIn, (req, res) => {
   res.render("places/create-new-place");
 });
 
@@ -68,11 +68,16 @@ router.get('/places/:placeId', (req, res) => {
 // /edit/:placeId	get	edit place
 
 router.get('/places/:placeId/edit', (req, res) => {
-
+  const userId = req.session.currentUser?._id;
   Place.findById(req.params.placeId).populate('author')
 
     .then((places) => {
-      res.render('places/place-edit', { places });
+      const authorUser = places.author[0]?._id.toString()
+      console.log(authorUser);
+      if (authorUser.includes(userId)) {
+        res.render('places/place-edit', { places });
+      }
+      res.redirect('/login');
     })
 
     .catch((error) => {
@@ -83,7 +88,7 @@ router.get('/places/:placeId/edit', (req, res) => {
 
 //POST edit places
 router.post('/places/:placeId/edit', fileUploader.single("img"), (req, res) => {
-  console.log("testing reouter post")
+
   const placeId = req.params.placeId;
   const { name, location, description, source, title, previousImg } = req.body;
   if (!name || !location || !description || !source || !title) {
@@ -101,8 +106,8 @@ router.post('/places/:placeId/edit', fileUploader.single("img"), (req, res) => {
 });
 
 // DELETE we need to create a form in place-edit.hbs
-router.post('/places/:placeId/delete', (req, res) => {
-  console.log(req.params.placeId);
+router.post('/places/:placeId/delete', isLoggedIn, (req, res) => {
+
   Place.findByIdAndRemove(req.params.placeId)
     .then(() => {
       res.redirect('/places/my-places/'+ req.session.currentUser._id);
@@ -145,36 +150,33 @@ router.post("/search", (req, res) => {
 
 })
 
-router.post('/places/:placeId/like', isLoggedIn ,(req, res) => {
+router.post('/places/:placeId/like', isLoggedIn, (req, res) => {
   const placeId = req.params.placeId;
-  const userId = req.session.currentUser._id
+  const userId = req.session.currentUser._id;
 
   Place.findById(placeId)
-    .then((data) => {
-      console.log(data.likes.includes(userId));
-      if(data.likes.includes(userId)) {
-        Place.updateOne(
-          { _id: `${placeId}` },
-          { $pull: { likes: `${userId}` } }
-        ).then(() => {
-          res.redirect("/places/" + placeId)
-        })
-      }
-      else {
-        Place.updateOne(
-          { _id: `${placeId}` }, 
-          { $addToSet: { likes: `${userId}` } }
-        ).then(() => {
-          res.redirect("/places/" + placeId)
-        })
+    .then((place) => {
+      if (!place) {
+        return res.status(404).send('Place not found');
       }
 
+      if (place.likes.includes(userId)) {
+        return Place.updateOne({ _id: placeId }, { $pull: { likes: userId } });
+      } else {
+        return Place.updateOne({ _id: placeId }, { $addToSet: { likes: userId } });
+      }
+    })
+    .then(() => {
+      res.redirect("/places/" + placeId);
     })
     .catch(error => {
       console.error(error);
-      res.send('Error fetching data');
+      res.status(500).send('Error processing request');
     });
 });
+
+module.exports = router;
+
 
 
 

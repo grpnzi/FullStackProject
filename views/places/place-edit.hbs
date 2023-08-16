@@ -1,36 +1,42 @@
-<h1>Edit {{places.name}}</h1>
-<form action="/places/{{places._id}}/edit" method="post" enctype="multipart/form-data">
-
-  <label for="name">Name</label>
-  <input type="text" id="name" name="name" value="{{places.name}}" required>
-
-   <label for="source">Source
-    <select id="source" name="source" value="{{places.source}}" required>
-      <option value="" disabled selected>Select a source</option>
-      <option value="Movie">Movie</option>
-      <option value="TV Show">TV Show</option>
-      <option value="Videogame">Videogame</option>
-      <option value="Anime">Anime</option>
-      <option value="Other">Other</option>
-    </select>
-  </label>
-
-  <label for="title">Title</label>
-  <input type="text" id="title" name="title" value="{{places.title}}" required>
-
-  <label for="location">Location</label>
-  <input type="text" id="location" name="location" value="{{places.location}}" required>
-
-  <label for="description">Description</label>
-  <textarea id="description" name="description" required>{{places.description}}</textarea>
-
-  <label for="img"></label>
-  <input type="file" name="img" id="img"/>
-  <input type="text" style="display: none;" name="previousImg" value="{{places.img}}"/>
-
-  <button type="submit">Edit</button>
-
-  {{#if errorMessage}}
-  <p class="error">{{errorMessage}}</p>
-  {{/if}}
-</form>
+<div class="container mb-4 mt-4" style="background-color: #EEA2A2;">
+  <h1 class="text-center mb-4">Edit {{places.name}}</h1>
+  <form action="/places/{{places._id}}/edit" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" value="{{places.name}}" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="source">Source</label>
+      <select id="source" name="source" value="{{places.source}}" required class="form-control">
+        <option value="" disabled selected>Select a source</option>
+        <option value="Movie">Movie</option>
+        <option value="TV Show">TV Show</option>
+        <option value="Videogame">Videogame</option>
+        <option value="Anime">Anime</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" value="{{places.title}}" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" value="{{places.location}}" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" required class="form-control">{{places.description}}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="img"></label>
+      <input type="file" name="img" id="img" class="form-control"/>
+      <input type="text" style="display: none;" name="previousImg" value="{{places.img}}">
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+    
+    {{#if errorMessage}}
+    <p class="error mt-3">{{errorMessage}}</p>
+    {{/if}}
+  </form>
+</div>

@@ -130,6 +130,7 @@ router.get('/places/my-places/:userId', (req, res) => {
 
 
 
+
 router.post("/search", (req, res) => {
   const searchInput = req.body.searchInput
   Place.find({ "name": { $regex: `${searchInput}`, $options: "i" } }).populate("author")
@@ -144,7 +145,8 @@ router.post("/search", (req, res) => {
 
 
 
-})
+
+// })
 
 router.post('/places/:placeId/like', isLoggedIn ,(req, res) => {
   const placeId = req.params.placeId;

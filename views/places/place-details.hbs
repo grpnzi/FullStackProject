@@ -6,29 +6,37 @@
       </div>
     </div>
 
-    <div class="row mt-3">
+    <div class="row mt-3 align-items-center d-flex">
       <div class="col-12">
         <img src="{{places.img}}" class="img-fluid rounded shadow" alt="Place Image">
       </div>
+          <span class="timer counter alt-font appear" data-to="980" data-speed="7000">{{places.likes.length}}</span>
+        <form action="/places/{{places._id}}/like" method="POST" class="d-flex align-items-center">
+          <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="600ms" style="visibility: visible; animation-duration: 600ms; animation-name: fadeInUp;">
+            <button type="submit" class="btn btn-outline-danger btn-floating btn-custom">
+            <i class="fas fa-heart"></i>
+            </button>
+          </div>
+        </form>
     </div>
 
     <div class="row mt-4">
       <div class="col-12">
-        <h2>Location</h2>
+        <h3>Location</h3>
         <a href="https://maps.google.com/?q={{places.location}}">{{places.location}}</a>
       </div>
     </div>
 
     <div class="row mt-4">
       <div class="col-12">
-        <h2>Description</h2>
+        <h3>Description</h3>
         <p>{{places.description}}</p>
       </div>
     </div>
 
     <div class="row mt-4">
       <div class="col-12">
-        <h2>Author</h2>
+        <h3>Author</h3>
         {{#each places.author}}
         <p>Created by {{this.username}}</p>
         {{/each}}

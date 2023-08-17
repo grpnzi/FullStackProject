@@ -3,17 +3,17 @@
 
 <div class="mt-3 mr-3"> 
   <form class="text-right" id="logout-form" action="/logout" method="POST">
-      <button type="submit" class="btn btn-md" style="background-color: #045337c1; color: #f3f7f5; border-radius: 15px;">Logout</button>
+      <button type="submit" class="btn btn-md" style="background-color: #045337c1; color: #ffff; border-radius: 15px;">Logout</button>
   </form>
 </div>
 <div class="container h-100">
   <h2 class="mt-5">Hello, {{userInSession.username}}!</h2>
 
-  <div class="row d-flex justify-content-center align-items-center h-100 ">
+  <div class="row d-flex justify-content-center align-items-center h-100" style='display:none'>
     <div class="col col-lg-9 col-xl-7">
-      <div class="card">
-        <div class="rounded-top text-white d-flex flex-row h-200" style="background-image: url('/images/signuphead.jpg'); background-size: cover;">
-          <div class="ms-4 mt-5 d-flex flex-column ml-3" style="width: 150px;">
+      <div class="card" style="background-color:#04533700; border:0">
+        <div class="rounded-top text-black d-flex flex-row h-200" style="background-image: url('/images/signuphead.jpg'); background-size: cover;">
+          <div class="ms-4 mt-5 d-flex flex-column ml-3" style="width: 150px">
             <img src="{{userInSession.img}}" alt="My profile picture." class="img-fluid img-thumbnail mt-4 mb-2"
               style="width: 150px; z-index: 1">
           </div>

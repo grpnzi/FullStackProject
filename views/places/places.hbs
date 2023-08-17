@@ -2,21 +2,34 @@
     <div class="row mx-0">
         {{#each places}}
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-          <div class="card rounded-lg mx-3 my-3 h-100 shadow" style="border: #c6f6e5c1">
-            <div class="image-container" style="height: 280px; overflow: hidden;">
-              <a href="/places/{{_id}}">
-                <img class="card-img-top img-fluid p-3 rounded" src="{{img}}" alt="{{name}}" style="object-fit: cover; width: 100%; height: 100%;">
-              </a>
+
+            <div class="card rounded-lg h-100 shadow" style="border: 1px solid #c6f6e5c1;">
+                <div class="image-container" style="height: 280px; overflow: hidden;">
+                    <a href="/places/{{_id}}">
+                        <img class="card-img-top img-fluid p-3" src="{{img}}" alt="{{name}}" style="object-fit: cover; width: 100%; height: 100%;">
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold"><a href="/places/{{_id}}" style="color: #045337c1;">{{name}}</a></h5>
+                    <h6 class="card-title">{{title}}</h6>
+                    {{#each author}}
+                    <p class="card-text">Created by {{this.username}}</p>
+                    {{/each}}
+                </div>
             </div>
-            <div class="card-body">
-              <h5 class="card-title font-weight-bold"><a href="/places/{{_id}}" style="color: #045337c1">{{name}}</a></h5>
-              <h6 class="card-title">{{title}}</h6>
-              {{#each author}}
-              <p class="card-text">Created by {{this.username}}</p>
-              {{/each}}
-            </div>
-          </div>
+
         </div>
         {{/each}}
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4 d-flex align-items-center">
+          <div class="card rounded-lg h-100 shadow" style="border: 1px solid #c6f6e5c1;">
+            <div class="image-container" style="height: 280px; overflow: hidden;">
+              <a href="/places/create">
+                <div class="h-100">
+                  <img class="img-fluid p-3 rounded" src="./images/createpinned.jpg" alt="Create a New Place" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
       </div>
+    </div>
 </div>

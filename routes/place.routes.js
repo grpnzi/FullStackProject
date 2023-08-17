@@ -76,8 +76,9 @@ router.get('/places/:placeId/edit', (req, res) => {
       console.log(authorUser);
       if (authorUser.includes(userId)) {
         res.render('places/place-edit', { places });
+      } else {
+        res.redirect('/login');
       }
-      res.redirect('/login');
     })
 
     .catch((error) => {

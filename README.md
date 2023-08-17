@@ -33,20 +33,23 @@ To do this, the necessary routes are the following:
 | /signup | POST | Create new user |
 | /login | GET | Get login form |
 | /login | POST | Login user |
-| /profile/:userId | GET | Display user profile |
-| /profile/:userId/edit | GET | Get edit form |
-| /profile/:userId/edit | POST | Update user profile |
-| /logout| POST | Ends user session |
+| /user-profile/: | GET | Display user profile |
+| /user-profile/edit | GET | Get edit form |
+| /user-profile/edit | POST | Update user profile |
+| /logout| POST | End user session |
 
 ### place.routes.js
 | Route | HTTP verb | Description|
 | --- | --- | --- |
-| /places-list | GET | Get list of all places |
+| /places | GET | Get list of all places |
 | /places/:placeId | GET | Get details of place |
-| /create | GET | Get new place form |
-| /create | POST | Create new place |
-| /edit/:placeId | GET | Get edit form |
-| /edit/:placeId | POST | Update place |
+| /places/create | GET | Get new place form |
+| /places/create | POST | Create new place |
+| /places/:placeId/edit | GET | Get edit form |
+| /places/:placeId/edit | POST | Update place |
+| /places/my-places/:userId | GET | Display all your created places |
+| /search | POST | Search by name (all places) |
+| //places/:placeId/like | POST | Update number of likes |
 | /delete | POST | Delete place |
 
 

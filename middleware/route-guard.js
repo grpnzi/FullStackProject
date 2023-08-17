@@ -19,7 +19,7 @@ const isLoggedOut = (req, res, next) => {
 };
 
 
-// ccreate function that checks if you are logged in that your session is identical to your user id request.param._id
+// create function that checks if you are logged in that your session is identical to your user id request.param._id
 
 
 

@@ -14,10 +14,10 @@
         <p>{{description}}</p>
         <div class="d-flex">
           <form action="/places/{{_id}}/edit">
-            <button type="submit" class="btn btn-primary mr-2">Edit</button>
+            <button type="submit" class="btn btn-md mx-2" style="background-color: #045337c1; color: #fff; border-radius: 15px;">Edit</button>
           </form>
           <form action="/places/{{_id}}/delete" method="post">
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-md btn-danger mx-2" style=" color: #fff; border-radius: 15px;">Delete</button>
           </form>
         </div>
       </div>
@@ -25,8 +25,5 @@
     <hr class="my-10">
   {{/each}}
 </div>
-
-
-
 
 

@@ -27,12 +27,12 @@ router.post("/signup", fileUploader.single("profile-img"), (req, res, next) => {
 
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
     if (!regex.test(password)) {
-      res
-        .status(400)
-        .render("auth/signup", {
-          errorMessage: "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter."
-      });
-      return;
+        res
+            .status(400)
+            .render("auth/signup", {
+                errorMessage: "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter."
+            });
+        return;
     }
 
     bcryptjs
@@ -104,34 +104,57 @@ router.post("/login", (req, res, next) => {
 
 
 // USER PROFILE ROUTES ------------------------------------------
-// router.get("/user-profile/:userId/edit", (req, res, next) => {
-//     const userId = req.params.userId
+router.get("/user-profile/edit", isLoggedIn, (req, res, next) => {
+    const userId = req.session.currentUser?._id;
 
-//     User.findById(userId)
-//         .then((foundUser) => {
-//             res.render("users/user-edit", {foundUser})
-//         })
-//         .catch(error => {
-//             console.log("Error while retrieving user details.");
-//             next(error);
-//         })    
-// })
+    User.findById(userId)
+        .then((foundUser) => {
+            res.render("users/user-edit", { foundUser })
+        })
+        .catch(error => {
+            console.log("Error while retrieving user details.");
+            next(error);
+        })
+})
 
-// router.post("/user-profile/:userId/edit", (req, res, next) => {
+router.post("/user-profile/edit", fileUploader.single("img"), (req, res, next) => {
 
-//     const userId = {
-//         username: req.body.username,
-//         email: req.body.email,
-//         country: req.body.country
-//     }
+    const userId = req.session.currentUser?._id;
+    const { username, email, password, country, previousImg } = req.body;
 
-//     User.findByIdAndUpdate(userId)
-//         .then(() => res.redirect(`/user-profile/${userId}`))
-//         .catch(error => {
-//             console.log("Error while updating user details.");
-//             next(error);
-//         })   
-// })
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (!regex.test(password)) {
+        res
+            .status(400)
+            .render("auth/signup", {
+                errorMessage: "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter."
+            });
+        return;
+    }
+
+    bcryptjs
+        .genSalt(saltRounds)
+        .then((salt) => bcryptjs.hash(password, salt))
+        .then((hashedPassword) => {
+            return User.findByIdAndUpdate(userId, { username, email, password: hashedPassword, country, img: req.file?.path || previousImg })
+        })
+        .then( (user) => {
+            req.session.currentUser = user;
+            res.redirect(`/user-profile`);
+        })
+        .catch((error) => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                res.status(500).render("auth/signup", { errorMessage: error.message });
+            } else if (error.code === 11000) {
+                res.status(500).render("auth/signup", {
+                    errorMessage: "Username and email need to be unique. Provide a valid username or email.",
+                });
+            } else {
+                next(error);
+            }
+        });
+
+});
 
 
 

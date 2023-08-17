@@ -94,11 +94,6 @@ router.post('/places/:placeId/edit', fileUploader.single("img"), (req, res) => {
   const placeId = req.params.placeId;
   const { name, location, description, source, title, previousImg } = req.body;
 
-  if ( !req.file?.path) {
-    res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide an image.' });
-    return
-  }
-  
   Place.findByIdAndUpdate(placeId, { name, location, description, img: req.file?.path || previousImg, source, title })
     .then(() => {
       res.redirect('/places/'+ placeId);

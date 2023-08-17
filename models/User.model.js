@@ -5,12 +5,12 @@ const userSchema = new Schema(
     username: {
       type: String,
       trim: true,
-      required: true,
+      required: [true, 'Username is required.'],
       unique: true
     },
     email: {
       type: String,
-      required: true,
+      required: [true, 'Email is required.'],
       unique: true,
       lowercase: true,
       trim: true,
@@ -18,15 +18,15 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     country: {
       type: String,
-      required: true
+      required: [true, 'Country is required.'],
     },
     img: {
       type: String,
-      required: true
+      required: [true, 'Image is required.'],
     }
   },
   {

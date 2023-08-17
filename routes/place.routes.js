@@ -32,11 +32,12 @@ router.get("/places/create", isLoggedIn, (req, res) => {
 router.post('/places/create', fileUploader.single('img'), (req, res) => {
 
   const { name, location, description, source, title } = req.body;
-  if (!name || !location || !description || !source || !title || !req.file?.path) {
-    res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide all the information.' });
+  if ( !req.file?.path) {
+    res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide an image.' });
     return
   }
-  Place.create({ name, location, description, img: req.file?.path, author: req.session.currentUser._id, source, title })
+
+  Place.create({ name, location, description, img: req.file?.path, author: req.session.currentUser?._id, source, title })
     .then(newPlace => {
       res.redirect('/places/'+ newPlace._id);
     })
@@ -77,7 +78,7 @@ router.get('/places/:placeId/edit', (req, res) => {
       if (authorUser.includes(userId)) {
         res.render('places/place-edit', { places });
       } else {
-        res.redirect('/login');
+        res.redirect('/login'); 
       }
     })
 
@@ -92,10 +93,12 @@ router.post('/places/:placeId/edit', fileUploader.single("img"), (req, res) => {
 
   const placeId = req.params.placeId;
   const { name, location, description, source, title, previousImg } = req.body;
-  if (!name || !location || !description || !source || !title) {
-    res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide all the information.' });
+
+  if ( !req.file?.path) {
+    res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide an image.' });
     return
   }
+  
   Place.findByIdAndUpdate(placeId, { name, location, description, img: req.file?.path || previousImg, source, title })
     .then(() => {
       res.redirect('/places/'+ placeId);
@@ -147,8 +150,7 @@ router.post("/search", (req, res) => {
       console.error(error);
       res.send('Error fetching data');
     });
-
-})
+});
 
 // Update like's in the place
 

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const User = require("../models/User.model");
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 
@@ -9,28 +9,30 @@ const fileUploader = require('../config/cloudinary.config');
 
 // SIGN UP ROUTES ------------------------------------------
 router.get("/signup", isLoggedOut, (req, res) => {
-    res.render("auth/signup")
-})
+    res.render("auth/signup");
+});
 
 router.get("/user-profile", (req, res) => {
     res.render('users/user-profile', { userInSession: req.session.currentUser });
-})
+});
 
 router.post("/signup", fileUploader.single("profile-img"), (req, res, next) => {
 
-    const { username, email, password, country } = req.body
+    const { username, email, password, country } = req.body;
 
-    if (!username || !email || !password || !country || !req.file.path) {
-        res.render("auth/signup", { errorMessage: "All fields are mandatory. Please provide all the information." });
-        return;
+    if (!req.file?.path) {
+        res.render("auth/signup", { errorMessage: 'All fields are mandatory. Please provide an image' });
+        return
     }
 
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
     if (!regex.test(password)) {
-        res
-            .status(500)
-            .render("auth/signup", { errorMessage: "Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter." });
-        return;
+      res
+        .status(400)
+        .render("auth/signup", {
+          errorMessage: "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter."
+      });
+      return;
     }
 
     bcryptjs
@@ -42,28 +44,31 @@ router.post("/signup", fileUploader.single("profile-img"), (req, res, next) => {
                 email,
                 password: hashedPassword,
                 country,
-                img: req.file.path
+                img: req.file?.path
             })
         })
         .then(createdUser => {
-            console.log("New user: ", createdUser);
             res.render("users/user-profile", { createdUser });
         })
-        .catch(error => {
+        .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError) {
                 res.status(500).render("auth/signup", { errorMessage: error.message });
+            } else if (error.code === 11000) {
+                res.status(500).render("auth/signup", {
+                    errorMessage: "Username and email need to be unique. Provide a valid username or email.",
+                });
             } else {
                 next(error);
             }
         });
-})
+});
 
 
 
 //LOG IN ROUTES ------------------------------------------
-router.get("/login", isLoggedOut,(req, res) => {
-    res.render("auth/login")
-})
+router.get("/login", isLoggedOut, (req, res) => {
+    res.render("auth/login");
+});
 
 router.post("/login", (req, res, next) => {
     const { username, password } = req.body;
@@ -94,7 +99,7 @@ router.post("/login", (req, res, next) => {
             }
         })
         .catch(error => next(error));
-})
+});
 
 
 

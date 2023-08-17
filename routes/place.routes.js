@@ -32,11 +32,11 @@ router.get("/places/create", isLoggedIn, (req, res) => {
 router.post('/places/create', fileUploader.single('img'), (req, res) => {
 
   const { name, location, description, source, title } = req.body;
-  if (!name || !location || !description || !source || !title || !req.file.path) {
+  if (!name || !location || !description || !source || !title || !req.file?.path) {
     res.render("places/create-new-place", { errorMessage: 'All fields are mandatory. Please provide all the information.' });
     return
   }
-  Place.create({ name, location, description, img: req.file.path, author: req.session.currentUser._id, source, title })
+  Place.create({ name, location, description, img: req.file?.path, author: req.session.currentUser._id, source, title })
     .then(newPlace => {
       res.redirect('/places/'+ newPlace._id);
     })
@@ -133,8 +133,7 @@ router.get('/places/my-places/:userId', authorUser, (req, res) => {
     });
 });
 
-
-
+// Search bar
 
 router.post("/search", (req, res) => {
   const searchInput = req.body.searchInput
@@ -149,6 +148,8 @@ router.post("/search", (req, res) => {
     });
 
 })
+
+// Update like's in the place
 
 router.post('/places/:placeId/like', isLoggedIn, (req, res) => {
   const placeId = req.params.placeId;
@@ -176,9 +177,3 @@ router.post('/places/:placeId/like', isLoggedIn, (req, res) => {
 });
 
 module.exports = router;
-
-
-
-
-module.exports = router;
-

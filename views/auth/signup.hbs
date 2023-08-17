@@ -1,78 +1,73 @@
-<section class="vh-100">
+<div class="container h-100 mt-5 mb-5">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-lg-12 col-xl-11">
+      <div class="card text-black" style="border-radius: 25px; background-color: rgba(255, 255, 255, 0.5);">
+        <div class="card-body p-md-5">
 
-  <div class="container h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-lg-12 col-xl-11">
-        <div class="card text-black" style="border-radius: 25px; background-color: rgba(255, 255, 255, 0.5);">
-          <div class="card-body p-md-5">
+          {{#if errorMessage}}
+          <p class="error">{{errorMessage}}</p>
+          {{/if}}
+          <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-            {{#if errorMessage}}
-            <p class="error">{{errorMessage}}</p>
-            {{/if}}
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-
-                <form class="mx-1 mx-md-4" method="POST" action="/signup" enctype="multipart/form-data">
-
-                  <div class="d-flex flex-row align-items-center mb-2">
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="username" class="form-control" name="username" placeholder="username"
-                        required />
-                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                      <label class="form-label" for="username">Username</label>
-                    </div>
+              <form class="mx-1 mx-md-4 pt-3 pb-2" method="POST" action="/signup" enctype="multipart/form-data">
+ 
+                {{!--<div class="d-flex flex-row align-items-center mb-2">
+                  <div class="form-outline flex-fill mb-0">
+                    <input type="text" id="username" class="form-control" name="username" placeholder="username"
+                      required />
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <label class="form-label" for="username">Username</label>
                   </div>
+                </div> --}}
 
-                  <div class="d-flex flex-row align-items-center mb-2">
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="email" class="form-control" name="email" placeholder="your@email.com"
-                        required />
-                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                      <label class="form-label" for="email">Email</label>
-                    </div>
+                <div class="input-group form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
                   </div>
+                  <input type="text" id="username" class="form-control" placeholder="Username" name="username">
+                </div>
 
-                  <div class="d-flex flex-row align-items-center mb-2">
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="password" class="form-control" name="password" placeholder="*******"
-                        required />
-                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                      <label class="form-label" for="password">Password</label>
-                    </div>
+                <div class="input-group form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                   </div>
+                  <input type="email" id="email" class="form-control" placeholder="your@email.com" name="email">
+                </div>
 
-                  <div class="d-flex flex-row align-items-center mb-2">
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="country" class="form-control" name="country" placeholder="country"
-                        required />
-                      <i class="fas fa-globe fa-lg me-3 fa-fw"></i>
-                      <label class="form-label" for="country">Country</label>
-                    </div>
+                <div class="input-group form-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-key"></i></span>
                   </div>
+                  <input type="password" id="password" class="form-control" name="password" placeholder="********" required>
+                </div>
 
-                  <div class="d-flex flex-row align-items-center mb-2">
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="file" id="profile-img" class="form-control" name="profile-img" accept="image/*">
-                      required
-                      <i class="fas fa-camera fa-lg me-3 fa-fw"></i>
-                      <label class="form-label" for="img">Upload Profile Image</label>
-                    </div>
+                <div class="input-group form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-globe"></i></span>
                   </div>
-
-                  <div class="d-flex justify-content-center mx-4">
-                    <button type="submit" class="btn btn-lg" style="background-color: #045337c1; color: #f3f7f5; border-radius: 15px;">Sign up!</button>
+                  <input type="text" id="country" class="form-control" placeholder="Country" name="country">
+                </div>
+                
+                <div class="input-group form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-camera"></i></span>
                   </div>
-              </div>
+                  <input type="file" id="profile-img" class="form-control" name="profile-img" accept="image/*">
+                </div>
 
-              </form>
-              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                <img src="./images/signup.jpg" class="img-fluid" alt="Inception bridge.">
-              </div>
+                <div class="d-flex justify-content-center mx-4">
+                  <button type="submit" class="btn btn-md" style="background-color: #045337c1; color: #f3f7f5; border-radius: 15px;">Sign up!</button>
+                </div>
+            </div>
+
+            </form>
+            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+              <img src="./images/signup.jpg" class="img-fluid rounded" alt="Inception bridge.">
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-</section>
+</div>
